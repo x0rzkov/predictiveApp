@@ -1,0 +1,105 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body  {
+        background-color: #ffffff;  /* background color */
+        font-family: 'Montserrat', sans-serif;  /* font */
+        font-weight: 400;
+        font-size: 16px;
+        color: #555;
+    }
+
+   
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+
+    
+     /*navbar color*/
+.navbar-inverse {  
+    background-color: #ff6666;
+    border-color: #ff6666; 
+    padding-bottom: 0px;
+    padding-top: 0px;
+    }
+
+ 
+    
+    /*Textfarg pa logo*/
+    .navbar-inverse .navbar-brand {
+    color: white;
+    
+    }
+    
+ /*Textfarg pa lankar och vid hover*/
+.navbar-inverse .navbar-nav  > li > a, a:hover {
+    color: white; 
+    }
+
+
+#blue_link a:hover  {
+    color: #b3b3ff;
+    text-decoration: none;    
+    }
+    
+#grey_link a:hover  {
+    color: #ccccb3;
+    text-decoration: none;    
+    }
+    
+    
+    
+.nav-pills > li.active > a{
+     background-color: #ff8080 !important; 
+     color: white !important;
+     outline: none !important;
+}
+
+#jumbotron {
+        background-color: #ffffff;
+        padding-top: 0px;
+        padding-bottom: 0px; 
+
+}
+
+.jumboIntro {
+        color: white;
+        font-size: 40px;
+        line-height: 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding-top: 0px;
+        border-style: none;
+        background-color: #ff6666; 
+    }
+
+.whitetxt {  
+    color: white;
+    } 
+
+.centered {
+    text-align: center;
+ }
+ 
+.footerstyle {
+   background-color: #8c8c8c;
+   padding-top: 50px;
+   padding-bottom: 50px; 
+   color: white;
+}
+
+ #inputTxtstr {
+    font-size: 16px;
+}
+
+.fa-github {
+    font-size: 25px;
+}

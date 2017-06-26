@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recommending and Segmenting</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--  favicon  -->
+        <link rel="shortcut icon" href="../static/img/leaf.ico">
+        <!-- Stylesheets  -->
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="../static/css/predAppStyle.css" rel="stylesheet">
+        <!-- JavaScript files  -->
+        <script src='../static/js/jquery-2.1.1.min.js'></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="http://fred-wang.github.io/mathml.css/mspace.js"></script>
+        <script src="../static/js/predApp.js"></script> 
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav nav-pills navbar-nav">
+                <li class="active"><a href="#" class="lnk_home">Home</a></li>
+                <li class="lnk_predAppp"><a href="#" class="lnk_predApp" >Real time prediction</a></li> 
+                <li><a href="#" data-toggle="modal" data-target="#myClusterModal">Notebooks</a></li>
+
+              </ul>
+              
+              <ul class="nav nav-pills navbar-nav navbar-right">
+                <li id="grey_link"><a href="https://github.com/DoubleEE/predictiveApp"  target="_blank"><i class="fa fa-github fa-1x"></i> GitHub - Get the code</a></li>
+   
+              </ul>
+            </div>
+          </div>
+        </nav>
+               
+
+        <!-- ***** jumboIntro ***** -->
+        <section class="jumboIntro">
+            <div class="container">
+                <div class="row whitetxt">
+                    <div class="col-sm-12">
+                        <h2 class="centered" id="wlcm">Welcome</h2>
+                        <h4 class="centered"> <i class="fa fa-code fa-4x"> </i></h4>
+                     </div>      <!-- col end -->
+                </div>           <!-- row end -->
+            </div>               <!-- container end -->
+        </section>               <!-- section end -->
+
+        <section id="articleTxt">      
+            <div class="container ">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <h2 class="text-center">Real time segmentation and recommendation</h2>
+                        <p> 
+                            Building predictive models off line and scoring in batch is useful but perhaps the greatest benefit and 
+                            advantage is when enabling real time predictions by embedding machine learning into web apps.  
+                            We already use these algorithms every day in search engines, spam detection and recommendation systems. <br><br>
+                            In the following example we’ll build a web app which in real time recommends products (using an item-based recommender system) and synchronously 
+                            segments customers (using k-means clustering). This will provide a more personalized customer experience and 
+                            more appropriate and timely recommendations to our customers.<br><br>
+                     
+                            We'll develop an application for the (fictive) <i>Healthy Foods Store</i> website. We'll use our models to segment and simultaneously recommend items when 
+                            the customer signs in to our site. We'll be using the Python Flask web framework and I'll provide the Python code necessary to build these models.
+                 
+                            If you want to read a summary on how I developed the models keep reading otherwise, if you'd like to test the predictive app immediately
+                            (and be a Healthy Foods...fictive customer!), click <span id="blue_link"> <a id="predActive" href="#" class="lnk_predApp">here </a> </span>
+                             
+                            <h3 class="text-center">Segmentation</h3>
+                            Clustering (or cluster analysis) is a an unsupervised algorithm which allows us to find groups of similar observations. 
+                            We will use K-Means clustering with the Euclidean distance as the distance measure. The lesser the distance the more similar the observations are.
+                                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" alttext="{\displaystyle {\sqrt {(x-y)^{2}}}=|x-y|.}">
+                                  <semantics>
+                                    <mrow class="MJX-TeXAtom-ORD">
+                                      <mstyle displaystyle="true" scriptlevel="0">
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <msqrt>
+                                            <mo stretchy="false">(</mo>
+                                            <mi>x</mi>
+                                            <mo>&#x2212;<!-- − --></mo>
+                                            <mi>y</mi>
+                                            <msup>
+                                              <mo stretchy="false">)</mo>
+                                              <mrow class="MJX-TeXAtom-ORD">
+                                                <mn>2</mn>
+                                              </mrow>
+                                            </msup>
+                                          </msqrt>
+                                        </mrow>
+                                        <mo>=</mo>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mo stretchy="false">|</mo>
+                                        </mrow>
+                                        <mi>x</mi>
+                                        <mo>&#x2212;<!-- − --></mo>
+                                        <mi>y</mi>
+                                        <mrow class="MJX-TeXAtom-ORD">
+                                          <mo stretchy="false">|</mo>
+                                        </mrow>
+                                        <mo>.</mo>
+                                      </mstyle>
+                                    </mrow>
+
+                                  </semantics>
+                                </math>
+                            <br>
+                            To determine the optimum number of clusters (k) we will use the silhouette coefficient. The silhouette coefficient is a measure of the 
+                            compactness and separation of the clusters and increases as the quality of the clusters increase. 
+                            The coefficient is large for compact clusters that are far from each other and small for large, overlapping clusters. <br>
+                              
+                            In this <span id="blue_link"> <a style="cursor:pointer" data-toggle="modal" data-target="#myClusterModal" id="openBtn">Jupyter notebook </a></span>  
+                            you will find a step-by-step instruction on how to build this cluster model. You can also download the notebook from my GitHub account<br>
+
+                            <br>
+                            <h3 class="text-center">Recommender system</h3>
+                            For our recommender system we will use item-based collaborative filtering. 
+                            In this method we measure the similarity (correlation score) between all pair of items purchased. Prior to recommending items, the correlation score
+                            is weighted with the amount the customer has spent on each item. The items with the highest scores are sorted ascending and presented to the customer 
+                            as the top recommended items.
+                            *In this recommender system I choose not to recommend previously purchased items by the customer. However in many cases a threshold value 
+                            can be appropriate. To avoid spurious results I only score item pairs where at least 10 customers has purchased both items.
+
+                            A step-by-step instruction on how to build this type of recommender system can be found in this 
+                            <span id="blue_link"> <a style="cursor:pointer" data-toggle="modal" data-target="#myRecoModal" id="openBtn">Jupyter notebook </a></span> 
+                            You can also download the notebook from my GitHub account<br>
+                            <br>
+                            <h4 class="text-center">Loading the models on the server</h4></b> 
+                            
+                            <p> For model persistence I use the cPickle module which allows us to serialize and de-serialize Python object structures to compact byte code, 
+                            and save our model to disc. On the server running Python we load and de-serialize the models and use them (via a HTTP post request) to segment customers and 
+                            recommend items and return the results to the client (the browser). 
+                            <br> <br>
+                             
+                             Did you miss my blog on building a Tableau Web Data Connector using the scikit-learn machine learning library? Read it <span id="blue_link"> <a href="http://doubleee.pythonanywhere.com/wdcblog" target="_blank"> here </a> </span>    
+                            
+                            </p>
+
+                        </p>
+                    </div>      <!-- col end -->
+             
+                    <div class="col-sm-1">
+                    
+                    </div>      <!-- col end -->
+           
+                 </div>         <!-- row end -->
+              
+              </div>            <!-- container end -->
+        </section>              <!-- section  end -->  
+       
+        <!-- jumbotron START -->
+        <section id="jumbotron">
+            <div class="container text-center">
+                <h4 class="centered">You might not be much interested in healthy food.....but this fictive online store only sells Healthy food </h4>
+                <h5 class="centered">to be able to recommend you items we, need to know how much you've spent (in €) in the last year on the following items:</h5>
+                <h6 class="centered">Obviously this information would be collected from the backend server when in production....</h6>
+                    
+                <div class="form-group">
+                    <div class="col-sm-3">
+                    </div>   
+                    <div class="col-sm-2">
+                        <div class="form-group centered">
+                            <label for="inputsm">Aloe Vera?</label>
+                            <input class="form-control centered input-sm" id="herbs_param" type="text">
+                        </div>
+                    </div>
+                          
+                    <div class="col-sm-2">
+                        <div class="form-group centered">
+                            <label for="inputsm">Green Tea Detox?</label>
+                            <input class="form-control centered input-sm" id="tea_param" type="text">
+                        </div>
+                    </div>
+          
+                    <div class="col-sm-2">
+                        <div class="form-group centered">
+                            <label for="inputsm">Power Protein bar?</label>
+                            <input class="form-control centered input-sm" id="protein_param" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>  
+                </div>   <!-- end form-group -->
+            </div>
+        </section>  
+        
+        <!-- showPredictions START -->
+        <section>   
+            <div class="container">
+                <div class="row">
+                    <br>
+                    <div class="form-group" id="showPredictions">
+                            <div class="alert alert-success centered col-sm-5" id="clusterInfo">  
+                                <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> <strong>&nbsp;File was uploaded successfully</strong>   
+                                
+                            </div>
+                            <div class="col-sm-1">
+                            </div>  
+                             
+                            <div class="alert alert-success centered col-sm-6" id="recommendInfo">  
+                                <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> <strong>&nbsp;File was uploaded successfully</strong>   
+                                
+                            </div>
+                       
+                    </div>   <!-- end form-group -->
+
+                </div>
+            </div>      <!-- container end -->
+        </section>      
+        <!-- showPredictions END -->    
+            
+        <!-- predAPP START -->
+        <section id="predApp">     
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                       <h4 class=""> </h4>
+                    </div>      <!-- col sm-4 end -->
+           
+                    
+                    <div class="col-sm-8">
+                        <br>
+                        <form class="form-horizontal" >
+                            <div class="form-group centered">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input id="customerName" class="form-control centered input-lg"  type="text" placeholder="Enter Your Name">
+                                    </div>
+                                    <div class="col-sm-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <br> 
+                            <div class="form-group centered">
+                                <label class="control-label" for="my-selector"> </label>
+                                <div class="col-sm-12 centered"> 
+                                    <button class="btn btn-info btn-lg" id="signinBtn" type="button"> <span>Sign in</span>
+                                     </button>               
+                                </div>
+                            </div>   <!-- end form-group -->
+                            
+           
+                        </form>   
+                        <div class="form-group" id="showError">
+                            <div class="alert alert-danger centered col-sm-6 col-sm-offset-3" id="errorInfo">
+                                <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i> <strong>&nbsp; There was an error</strong>  
+                            </div>
+                            <div class="col-sm-3">
+                            </div>    
+                        </div>   <!-- end form-group -->
+                    </div><!-- col sm-8 end -->
+                    
+                    <div class="col-sm-2">
+                           <h4 class=""> </h4>
+                    </div>      <!-- col sm-4 end -->
+                </div>      <!-- row end -->
+            </div>      <!-- container end -->
+        </section>      
+        <!--  predApp END-->
+
+      
+        <!-- ***** Modul Dialog Cluster ***** -->   
+        <section>      
+            <div class="container">
+                <!-- Modal -->
+                <div class="modal fade" id="myClusterModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title">Jupyter notebook - Clustering</h3>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <iframe class="centered" src="../static/html/Healthy Food Store - Customer segmentation with K-means Clustering.html" height="1250" frameborder="0" style="zoom:0.99" width="99%" style="border:none;"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          <!-- container end -->
+        </section> 
+        <!-- ***** Modul Dialog Recommender ***** -->   
+        <section>      
+            <div class="container">
+                <!-- Modal -->
+                <div class="modal fade" id="myRecoModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title">Jupyter notebook -  Recommending items</h3>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <iframe class="centered" src="../static/html/Healthy Food Store - Recommending items with Item based collaborative filtering.html" height="1250" frameborder="0" style="zoom:0.99" width="99%" style="border:none;"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          <!-- container end -->
+        </section> 
+        <footer class="container-fluid footerstyle text-center">
+            <p>Healthy Foods inc.</p>
+        </footer>
+    </body>
+</html>
