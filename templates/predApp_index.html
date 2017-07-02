@@ -14,7 +14,6 @@
         <!-- JavaScript files  -->
         <script src='../static/js/jquery-2.1.1.min.js'></script>
         <script src="../static/js/bootstrap.min.js"></script>
-        <script src="http://fred-wang.github.io/mathml.css/mspace.js"></script>
         <script src="../static/js/predApp.js"></script> 
     </head>
 
@@ -80,40 +79,6 @@
                             <h3 class="text-center">Segmentation</h3>
                             Clustering (or cluster analysis) is a an unsupervised algorithm which allows us to find groups of similar observations. 
                             We will use K-Means clustering with the Euclidean distance as the distance measure. The lesser the distance the more similar the observations are.
-                                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" alttext="{\displaystyle {\sqrt {(x-y)^{2}}}=|x-y|.}">
-                                  <semantics>
-                                    <mrow class="MJX-TeXAtom-ORD">
-                                      <mstyle displaystyle="true" scriptlevel="0">
-                                        <mrow class="MJX-TeXAtom-ORD">
-                                          <msqrt>
-                                            <mo stretchy="false">(</mo>
-                                            <mi>x</mi>
-                                            <mo>&#x2212;<!-- − --></mo>
-                                            <mi>y</mi>
-                                            <msup>
-                                              <mo stretchy="false">)</mo>
-                                              <mrow class="MJX-TeXAtom-ORD">
-                                                <mn>2</mn>
-                                              </mrow>
-                                            </msup>
-                                          </msqrt>
-                                        </mrow>
-                                        <mo>=</mo>
-                                        <mrow class="MJX-TeXAtom-ORD">
-                                          <mo stretchy="false">|</mo>
-                                        </mrow>
-                                        <mi>x</mi>
-                                        <mo>&#x2212;<!-- − --></mo>
-                                        <mi>y</mi>
-                                        <mrow class="MJX-TeXAtom-ORD">
-                                          <mo stretchy="false">|</mo>
-                                        </mrow>
-                                        <mo>.</mo>
-                                      </mstyle>
-                                    </mrow>
-
-                                  </semantics>
-                                </math>
                             <br>
                             To determine the optimum number of clusters (k) we will use the silhouette coefficient. The silhouette coefficient is a measure of the 
                             compactness and separation of the clusters and increases as the quality of the clusters increase. 
@@ -166,29 +131,29 @@
                 <h6 class="centered">Obviously this information would be collected from the backend server when in production....</h6>
                     
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-xs-3">
                     </div>   
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <div class="form-group centered">
-                            <label for="inputsm">Aloe Vera?</label>
+                            <label class="paramtext" for="inputsm">Aloe Vera?</label>
                             <input class="form-control centered input-sm" id="herbs_param" type="text">
                         </div>
                     </div>
                           
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <div class="form-group centered">
-                            <label for="inputsm">Green Tea Detox?</label>
+                            <label class="paramtext" for="inputsm">Green Tea?</label>
                             <input class="form-control centered input-sm" id="tea_param" type="text">
                         </div>
                     </div>
           
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <div class="form-group centered">
-                            <label for="inputsm">Power Protein bar?</label>
+                            <label class="paramtext" for="inputsm">Protein bars?</label>
                             <input class="form-control centered input-sm" id="protein_param" type="text">
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-xs-3">
                     </div>  
                 </div>   <!-- end form-group -->
             </div>
@@ -267,6 +232,10 @@
                     </div>      <!-- col sm-4 end -->
                 </div>      <!-- row end -->
             </div>      <!-- container end -->
+          
+            <div class="container addHeightToPage"> 
+            </div> 
+
         </section>      
         <!--  predApp END-->
 
@@ -317,6 +286,7 @@
                 </div>
             </div>          <!-- container end -->
         </section> 
+        
         <footer class="container-fluid footerstyle text-center">
             <p>Healthy Foods inc.</p>
         </footer>
